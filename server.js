@@ -25,10 +25,7 @@ mongoose.connect(process.env.MONGODB_URL)
 app.get("/", (req, res) => {
   res.send("Backend Running 🚀");
 });
-import express from "express";
-import cors from "cors";
 
-const app = express();
 
 // ✅ CORS FIRST
 app.use(cors({
@@ -38,9 +35,6 @@ app.use(cors({
   ],
   credentials: true
 }));
-
-// ✅ THEN JSON
-app.use(express.json());
 
 // ✅ THEN ROUTES
 app.use("/api/user", userRoutes);
