@@ -25,10 +25,27 @@ mongoose.connect(process.env.MONGODB_URL)
 app.get("/", (req, res) => {
   res.send("Backend Running 🚀");
 });
+import express from "express";
+import cors from "cors";
+
+const app = express();
+
+// ✅ CORS FIRST
 app.use(cors({
-  origin: "https://slotify-work.vercel.app",
+  origin: [
+    "http://localhost:5173",
+    "https://slotify-work.vercel.app"
+  ],
   credentials: true
 }));
+
+// ✅ THEN JSON
+app.use(express.json());
+
+// ✅ THEN ROUTES
+app.use("/api/user", userRoutes);
+app.use("/api/shop", shopRoutes);
+app.use("/api/bookings", bookingRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/shop", shopRoutes);
 app.use("/api/bookings", bookingRoutes);
